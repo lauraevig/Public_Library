@@ -1,0 +1,209 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>A visual library for Challenge #1</title>
+    <meta name="description" content="List.js is super flexible and here are two examples of how to use it.">
+    <meta name="author" content="Jonny Strömberg - revised by Laura">
+	<meta name="google-site-verification" content="CxtqsFWhMxG32DK5A7Hbtg1ficvqhu9sybSeDP25JpI" />
+
+    <!--
+
+    Nothing to see here that has to do with List.js, look at the bottom of the page!
+
+    -->
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagTitle('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Droid+Sans:400,700:latin', 'Della+Respira::latin', 'Clicker+Script::latin', 'Oswald::latin', 'Open+Sans:400,800,600,700:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
+</head>
+
+<body>
+
+    <div id="container" class="example-page">
+        <div class="top-title">
+            <h1>Code Fellows Public Library</h1>
+             <h2>JS Bootcamp Challenge #1</h2>
+        </div>
+
+            <div id="main">
+
+                <div class="c1">
+                    <h3>Current Titles</h3>
+                    <div id="lovely-things-filters">
+                        <ul class="filter">
+                            <li class="btn" id="filter-none">Show all books</li>
+                        </ul>
+                        &nbsp;
+                        &nbsp;
+                         <div class="filterbox">
+                        <div class="infotype">Filter by Availability</div>
+                        <ul class="filter">
+                            <li class="btn" id="filter-available">Only show Available (enshelf)</li>
+                            <li class="btn" id="filter-unavailable">Only show Checked Out (unshelf)</li>
+                        </ul>
+                        </div>
+                        &nbsp;
+                        &nbsp;
+                        <div class="filterbox">
+                        <div class="infotype">or Filter by Shelf Number</div>
+                         <ul class="filter">
+                            <li class="btn" id="filter-1">Shelf 1</li>
+                            <li class="btn" id="filter-2">Shelf 2</li>
+                            <li class="btn" id="filter-3">Shelf 3</li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div id="lovely-things-list">
+                        <ul class="list">
+                            <li>
+                                <img src="images/doctor.jpg" class="thumb" />
+                                <h4><span class="title"></span>Doctor Sleep<span class="category">Enshelf</span></h4>
+                                <p class="author">Stephen King</p>
+                                <p><span class="shelf">Shelf 1</span></p>
+                            </li>
+                            <li>
+                                <img src="images/human.jpg" class="thumb" />
+                                <h4><span class="title">The Story of the Human Body</span> <span class="category">Unshelf</span></h4>
+                                <p class="Author">Daniel Lieberman</p>
+                                <p><span class="shelf">Shelf 2</span></p>
+                            </li>
+                            <li>
+                                <img src="images/mountain.jpg" class="thumb" />
+                                <h4><span class="title">The Mountain: My Time on Everest</span> <span class="category">Enshelf</span></h4>
+                                <p class="author">David Roberts</p>
+                                <p><span class="shelf">Shelf 1</span></p>
+                            </li>
+                            <li>
+                                <img src="images/identical.jpg" class="thumb" />
+                                <h4><span class="title">Identical</span> <span class="category">Enshelf</span></h4>
+                                <p class="author">Scott Turow</p>
+                                <p><span class="shelf">Shelf 3</span></p>
+                            </li>
+                              <li>
+                                <img src="images/moon.jpg" class="thumb" />
+                                <h4><span class="title">Unhooking the Moon</span> <span class="category">Unshelf</span></h4>
+                                <p class="author">Gregory Hughes</p>
+                                <p><span class="shelf">Shelf 3</span></p>
+                            </li>
+                              <li>
+                                <img src="images/parasite.jpg" class="thumb" />
+                                <h4><span class="title">Parasite</span> <span class="category">Enshelf</span></h4>
+                                <p class="author">Mira Grand</p>
+                                <p><span class="shelf">Shelf 2</span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+
+    </div> <!-- end of #container -->
+
+
+    <!-- Start of List.js stuff -->
+    <script src="src/list.js"></script>
+
+    <script type="text/javascript">
+
+        /*
+        * Book Filters
+        */
+
+        var options = {
+    	    valueNames: [ 'title', 'author', 'category', 'shelf' ]
+        };
+
+        var featureList = new List('lovely-things-list', options);
+
+        $('#filter-unavailable').click(function() {
+            featureList.filter(function(item) {
+                if (item.values().category == "Unshelf") {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        });
+
+        $('#filter-available').click(function() {
+            featureList.filter(function(item) {
+                if (item.values().category == "Enshelf") {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        });
+        $('#filter-none').click(function() {
+            featureList.filter();
+            return false;
+        });
+        
+         $('#filter-1').click(function() {
+            featureList.filter(function(item) {
+                if (item.values().shelf == "Shelf 1") {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        });
+        
+        $('#filter-2').click(function() {
+            featureList.filter(function(item) {
+                if (item.values().shelf == "Shelf 2") {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        });
+        
+        $('#filter-3').click(function() {
+            featureList.filter(function(item) {
+                if (item.values().shelf == "Shelf 3") {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        });
+        
+    </script>
+    <!-- End of List.js stuff -->
+</body>
+</html>
