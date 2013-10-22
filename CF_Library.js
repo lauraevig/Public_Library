@@ -52,7 +52,7 @@
         };
                         
         //Which books go on/off of which shelf?
-        var brave = new book("Brave New Work", "Aldous Huxley");
+        var brave = new book("Brave New World", "Aldous Huxley");
         var shelfTwo = new Shelf ();
         brave.enshelf(shelfTwo);
                 
